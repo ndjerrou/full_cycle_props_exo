@@ -1,18 +1,17 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 const SearchBar = ({ onSearchEmployee }) => {
-  const [term, setTerm] = useState('');
+  const { register, handleSubmit } = useForm();
 
-  const handleChange = e => {
-    setTerm(e.target.value);
-
-    if (e.target.value.length >= 3) {
-      onSearchEmployee(e.target.value);
-    }
-  };
   return (
     <>
       <label>Chercher un employee </label>
-      <input value={term} onChange={handleChange} />
+      <form onSubmit={handleSubmit(({ term, age }) => console.log(term, age))}>
+        <input {...register('term', { required: true, minLength: 3 })} />
+        <input {...register('age')} />
+        <button>Search</button>
+      </form>
     </>
   );
 };

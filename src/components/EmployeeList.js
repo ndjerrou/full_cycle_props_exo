@@ -1,7 +1,8 @@
-const EmployeeList = ({ employees }) => {
+const EmployeeList = props => {
+  console.log(props);
   return (
     <ul>
-      {employees.map(emp => (
+      {props.employees.map(emp => (
         <li key={emp.id}>{emp.firstName}</li>
       ))}
     </ul>

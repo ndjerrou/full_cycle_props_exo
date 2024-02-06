@@ -29,19 +29,33 @@ function App() {
   ]);
 
   const onSearchEmployee = searchTerm => {
+    const originalEmployees = [...employees];
+
+    // @TODO
     const filteredEmployees = employees.filter(emp =>
       emp.firstName.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     console.log(filteredEmployees);
 
-    // ?
-    setEmployees(filteredEmployees);
+    if (!filteredEmployees.length) setEmployees(originalEmployees);
+    else setEmployees(filteredEmployees);
+  };
+  const obj = {
+    class: 'fsd',
+    students: 25,
+    working: 'JS',
   };
   return (
     <>
       <SearchBar onSearchEmployee={onSearchEmployee} />
-      <EmployeeList employees={employees} />
+      {/* <EmployeeList
+        employees={employees}
+        class={obj.class}
+        students={obj.students}
+        working={obj.working}
+      /> */}
+      <EmployeeList employees={employees} {...obj} />
     </>
   );
 }
